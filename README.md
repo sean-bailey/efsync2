@@ -1,6 +1,6 @@
 # 🚀 efsync2 - Open-Source MLOps tool for running serverless machine learning
 
-[![Downloads](https://pepy.tech/badge/efsync)](https://pepy.tech/project/efsync) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/philschmid/efsync/blob/main/examples/efsync_pip_packages_and_s3_files.ipynb) ![pypi package deployment](https://github.com/philschmid/efsync/workflows/pypi%20package%20deployment/badge.svg) [![PyPI version](https://badge.fury.io/py/efsync.svg)](https://badge.fury.io/py/efsync)
+[![Downloads](https://pepy.tech/badge/efsync)](https://pepy.tech/project/efsync) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sean-bailey/efsync2/blob/main/examples/efsync_pip_packages_and_s3_files.ipynb) ![pypi package deployment](https://github.com/sean-bailey/efsync2/workflows/pypi%20package%20deployment/badge.svg) [![PyPI version](https://badge.fury.io/py/efsync.svg)](https://badge.fury.io/py/efsync)
 
 efsync2 is an updated fork from [Philipp Schmid's](https://github.com/philschmid) efsync tool. I noticed that there were errors rendering the code non-functional for deployment, as specified in [This issue](https://github.com/philschmid/efsync/issues/15). Fortunately, [Chi W Pak](https://github.com/ChiWPak) generated a fix and a [Pull Request](https://github.com/philschmid/efsync/pull/18) which would fix it! Unfortunately, as of this writing, these issues and PR have been outstanding for over six months. I wanted to share deployable serverless machine learning inferences running purely on Lambda, and wanted to include functioning packages and code in the instructions. So, I implemented Chi's fix into a fork of Philipp's code, and am releasing it as its own package for future use -- efsync2!
 
@@ -12,7 +12,16 @@ I recommend starting with [Quick Start](#quick-start). Efsync2 enables you to in
 
 There are several examples for many usecases.
 
-![CLI Example](./cli.png)
+
+# Installation and Basic Useage:
+```
+#Install via pip3:
+pip3 install efsync2
+
+#Sync your pip packages or files to AWS EFS:
+efsync2 -cf efsync.yaml
+
+```
 
 ## Outline
 
