@@ -1,6 +1,6 @@
 import paramiko
 from scp import SCPClient
-from efsync.utils.ssh.createSSHClient import createSSHClient
+from efsync2.utils.ssh.createSSHClient import createSSHClient
 import boto3
 
 

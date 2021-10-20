@@ -1,6 +1,6 @@
 import boto3
 import paramiko
-from efsync.utils.helper.createSSHClient import createSSHClient
+from efsync2.utils.helper.createSSHClient import createSSHClient
 
 
 def mount_efs(bt3=None, instance_id=None, efs_filesystem_id=None, clean_efs=None, ec2_key_name=None, logger=None):

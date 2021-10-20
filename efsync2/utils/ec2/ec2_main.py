@@ -1,9 +1,9 @@
 import boto3
-from efsync.utils.ec2.ec2_waiter import wait_for_ec2
-from efsync.utils.ec2.create_user_data import create_user_data
-from efsync.utils.security_group.ec2_security_group import get_security_group_id
-from efsync.utils.iam_profile.iam_profile import create_iam_profile, delete_iam_profile
-from efsync.utils.ec2.custom_waiter import custom_waiter
+from efsync2.utils.ec2.ec2_waiter import wait_for_ec2
+from efsync2.utils.ec2.create_user_data import create_user_data
+from efsync2.utils.security_group.ec2_security_group import get_security_group_id
+from efsync2.utils.iam_profile.iam_profile import create_iam_profile, delete_iam_profile
+from efsync2.utils.ec2.custom_waiter import custom_waiter
 
 import time
 

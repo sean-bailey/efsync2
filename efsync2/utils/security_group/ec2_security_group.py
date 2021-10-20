@@ -5,7 +5,7 @@ def create_secruity_group(bt3=None):
     try:
         ec2 = bt3.client('ec2')
         sec_group = ec2.create_security_group(
-            GroupName='efsync-group', Description='efsync-group sec group')
+            GroupName='efsync2-group', Description='efsync2-group sec group')
         ec2.authorize_security_group_ingress(GroupId=sec_group['GroupId'],
                                              IpProtocol="tcp",
                                              CidrIp="0.0.0.0/0",
@@ -19,7 +19,7 @@ def create_secruity_group(bt3=None):
             raise(e)
 
 
-def get_security_group_id(bt3=None, group_name='efsync-group'):
+def get_security_group_id(bt3=None, group_name='efsync2-group'):
     try:
         ec2 = bt3.client('ec2')
         response = ec2.describe_security_groups(
@@ -33,7 +33,7 @@ def get_security_group_id(bt3=None, group_name='efsync-group'):
         raise(e)
 
 
-def delete_secruity_group(bt3=None, group_id='', group_name='efsync-group'):
+def delete_secruity_group(bt3=None, group_id='', group_name='efsync2-group'):
     try:
         ec2 = bt3.client('ec2')
         if len(group_id) > 0:

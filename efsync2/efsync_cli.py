@@ -1,11 +1,11 @@
 from argparse import ArgumentParser
-from efsync.main import efsync
+from efsync2.main import efsync
 
 
 def main():
     # Initiate the parser with a description
     parser = ArgumentParser(
-        "efsync CLI tool. More Information read https://github.com/", usage="efsync <command> [<args>]")
+        "efsync2 CLI tool. More Information read https://github.com/", usage="efsync2 <command> [<args>]")
     parser.add_argument("--version", "-v",
                         help="show program version", action="store_true")
 
@@ -13,7 +13,7 @@ def main():
                         help="path of your requirements.txt", default="requirements.txt")
     # optional
     parser.add_argument(
-        "--config_file", "-cf", help="path of your efsync.yaml")
+        "--config_file", "-cf", help="path of your efsync2.yaml")
 
     parser.add_argument("--python_version", "-py",
                         help="Python version used to install dependencies",
@@ -36,7 +36,7 @@ def main():
 
     parser.add_argument("--aws_profile", "-ap",
                         help="name of the used AWS profile",
-                        default='efsync')
+                        default='efsync2')
 
     parser.add_argument("--aws_region", "-ar",
                         help="aws region where the efs is running",

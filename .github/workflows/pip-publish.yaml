@@ -3,7 +3,7 @@ name: pypi package deployment
 on:
   push:
     #paths:
-    #  - efsync/**
+    #  - efsync2/**
     branches: [main]
 
 jobs:

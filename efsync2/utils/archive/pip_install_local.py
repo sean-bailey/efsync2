@@ -3,7 +3,7 @@ import subprocess
 import shutil
 
 
-def pip_install_requirements(file='requirements.txt', python_version='', pip_dir='', default_dir=".efsync"):
+def pip_install_requirements(file='requirements.txt', python_version='', pip_dir='', default_dir=".efsync2"):
     try:
         shutil.rmtree(f"{default_dir}/{pip_dir}")
         os.mkdir(f"{default_dir}/{pip_dir}")
@@ -25,4 +25,4 @@ def pip_install_requirements(file='requirements.txt', python_version='', pip_dir
 
 
 # docker run -it -v "$PWD":/var/task lambci/lambda:build-python3.8 bash
-# docker run -it -v "$PWD":/var/task lambci/lambda:build-python3.8 pip3 --no-cache-dir install -t .efsync/lib -r requirements.txt
+# docker run -it -v "$PWD":/var/task lambci/lambda:build-python3.8 pip3 --no-cache-dir install -t .efsync2/lib -r requirements.txt

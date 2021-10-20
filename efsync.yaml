@@ -1,10 +1,10 @@
 #standard configuration
 efs_filesystem_id: fs-2adfas123 # aws efs filesystem id (moint point)
 subnet_Id: subnet-xxx # subnet of which the efs is running in
-ec2_key_name: efsync-asd913fjgq3 # required key name for starting the ec2 instance
+ec2_key_name: efsync2-asd913fjgq3 # required key name for starting the ec2 instance
 clean_efs: all # Defines if the EFS should be cleaned up before. values: `'all'`,`'pip'`,`'file'` uploading
 # aws profile configuration
-aws_profile: efsync # aws iam profile with required permission configured in .aws/credentials
+aws_profile: efsync2 # aws iam profile with required permission configured in .aws/credentials
 aws_region: eu-central-1 # the aws region where the efs is running
 
 # pip packages configurations

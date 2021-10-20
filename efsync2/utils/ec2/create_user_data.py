@@ -1,5 +1,5 @@
 
-from efsync.utils.config.read_requirements_from_file import read_requirements_from_file
+from efsync2.utils.config.read_requirements_from_file import read_requirements_from_file
 
 
 def create_user_data(config: dict = None):

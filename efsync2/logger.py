@@ -12,7 +12,7 @@ def get_console_handler():
     return console_handler
 
 
-def get_logger(logger_name='efsync'):
+def get_logger(logger_name='efsync2'):
     logger = logging.getLogger(logger_name)
     # better to have too much log than not enough
     logger.setLevel(logging.DEBUG)

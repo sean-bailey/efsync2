@@ -1,10 +1,16 @@
-# 🚀 efsync - Open-Source MLOps tool for running serverless machine learning
+# 🚀 efsync2 - Open-Source MLOps tool for running serverless machine learning
 
 [![Downloads](https://pepy.tech/badge/efsync)](https://pepy.tech/project/efsync) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/philschmid/efsync/blob/main/examples/efsync_pip_packages_and_s3_files.ipynb) ![pypi package deployment](https://github.com/philschmid/efsync/workflows/pypi%20package%20deployment/badge.svg) [![PyPI version](https://badge.fury.io/py/efsync.svg)](https://badge.fury.io/py/efsync)
 
-efsync is an CLI/SDK tool, which automatically syncs files and dependencies to AWS EFS. The CLI is easy to use, you only need access to an AWS Account, an AWS EFS-filesystem up and running. I wrote an article with an complete walkthrough. you can check this one out [here](https://www.philschmid.de/efsync-my-first-open-source-mlops-toolkit) or simply start with the [Quick Start](#quick-start). Efsync enables you to install dependencies with the AWS Lambda runtime directly into your EFS filesystem and use them in your AWS Lambda function. It enables you either combine this with syncing files from S3 or uploading them with SCP. You can also sync files from S3 and upload with SCP without installing Pip dependencies.
+efsync2 is an updated fork from [Philipp Schmid's](https://github.com/philschmid) efsync tool. I noticed that there were errors rendering the code non-functional for deployment, as specified in [This issue](https://github.com/philschmid/efsync/issues/15). Fortunately, [Chi W Pak](https://github.com/ChiWPak) generated a fix and a [Pull Request](https://github.com/philschmid/efsync/pull/18) which would fix it! Unfortunately, as of this writing, these issues and PR have been outstanding for over six months. I wanted to share deployable serverless machine learning inferences running purely on Lambda, and wanted to include functioning packages and code in the instructions. So, I implemented Chi's fix into a fork of Philipp's code, and am releasing it as its own package for future use -- efsync2!
 
-i created several examples for every usecase.
+The vast majority of work I attribute to Philipp, and I keep the license the same. I wanted to keep as much functionality as possible the same, with identical function calls from his work, in case anyone was looking to 
+
+efsync2 is a CLI/SDK tool, which automatically syncs files and dependencies to AWS EFS. The CLI is easy to use, you only need access to an AWS Account, an AWS EFS-filesystem up and running. Philipp wrote an article on the original efsync [here](https://www.philschmid.de/efsync-my-first-open-source-mlops-toolkit), which currently covers the same function calls and functionality. 
+
+I recommend starting with [Quick Start](#quick-start). Efsync2 enables you to install dependencies with the AWS Lambda runtime directly into your EFS filesystem and use them in your AWS Lambda function. It enables you either combine this with syncing files from S3 or uploading them with SCP. You can also sync files from S3 and upload with SCP without installing Pip dependencies.
+
+There are several examples for many usecases.
 
 ![CLI Example](./cli.png)
 
@@ -24,7 +30,7 @@ Example in Google Colab. [![Open In Colab](https://colab.research.google.com/ass
 1. **Install via pip3**
 
 ```bash
-pip3 install efsync
+pip3 install efsync2
 ```
 
 2.  **sync your pip dependencies or files to AWS EFS**
@@ -32,20 +38,20 @@ pip3 install efsync
 usage with the cli
 
 ```bash
-efsync -cf efsync.yaml
+efsync2 -cf efsync.yaml
 ```
 
 or with python
 
 ```python
-from efsync import efsync
+from efsync2 import efsync
 
 efsync('efsync.yaml')
 ```
 
 # ⚙️ <a name="sdk"></a> Configurations
 
-There are 4 different ways to use efsync in your project. You can create a `yaml` configuration and use the SDK, you can create a python `dict` and use the SDK, you can create a `yaml` configuration and use the CLI, or you can use the CLI with parameters. Below you can find examples for each of these. I also included afterwards configuration examples for the different use cases.
+There are 4 different ways to use efsync2 in your project. You can create a `yaml` configuration and use the SDK, you can create a python `dict` and use the SDK, you can create a `yaml` configuration and use the CLI, or you can use the CLI with parameters. Below you can find examples for each of these. I also included afterwards configuration examples for the different use cases.
 
 _Note: If you sync file with scp from local directory (e.g. model/bert) to efs (my_efs_model) efsync will sync the model to (my_efs_model/bert) that happens because scp uploads the files recursively._
 
@@ -55,10 +61,10 @@ _Note: If you sync file with scp from local directory (e.g. model/bert) to efs (
 #standard configuration
 efs_filesystem_id: fs-2adfas123 # aws efs filesystem id (moint point)
 subnet_Id: subnet-xxx # subnet of which the efs is running in
-ec2_key_name: efsync-asd913fjgq3 # required key name for starting the ec2 instance
+ec2_key_name: efsync2-asd913fjgq3 # required key name for starting the ec2 instance
 clean_efs: all # Defines if the EFS should be cleaned up before. values: `'all'`,`'pip'`,`'file'` uploading
 # aws profile configuration
-aws_profile: efsync # aws iam profile with required permission configured in .aws/credentials
+aws_profile: efsync2 # aws iam profile with required permission configured in .aws/credentials
 aws_region: eu-central-1 # the aws region where the efs is running
 
 # pip dependencies configurations
@@ -76,7 +82,7 @@ file_dir: local_dir # extra local directory for file upload like ML models
 ```
 
 ```python
-from efsync import efsync
+from efsync2 import efsync
 
 efsync('efsync.yaml')
 ```
@@ -84,11 +90,11 @@ efsync('efsync.yaml')
 ## Configuration with CLI Parameters
 
 ```bash
-efsync  --efs_filesystem_id  fs-2adfas123 \
+efsync2  --efs_filesystem_id  fs-2adfas123 \
         --subnet_Id subnet-xxx \
-        --ec2_key_name efsync-asd913fjgq3 \
+        --ec2_key_name efsync2-asd913fjgq3 \
         --clean_efs all \
-        --aws_profile efsync \
+        --aws_profile efsync2 \
         --aws_region yo-region-1 \
         --efs_pip_dir lib \
         --python_version 3.8 \
@@ -102,7 +108,7 @@ efsync  --efs_filesystem_id  fs-2adfas123 \
 ## Configuration with CLI and yaml
 
 ```bash
-efsync -cf efsync.yaml
+efsync2 -cf efsync.yaml
 ```
 
 ## Configuration with python dictonary
@@ -111,9 +117,9 @@ efsync -cf efsync.yaml
 config = {
   'efs_filesystem_id': 'fs-2adfas123', # aws efs filesystem id (moint point)
   'subnet_Id': 'subnet-xxx', # subnet of which the efs is running in
-  'ec2_key_name':'efsync-asd913fjgq3',  # required key name for starting the ec2 instance
+  'ec2_key_name':'efsync2-asd913fjgq3',  # required key name for starting the ec2 instance
   'clean_efs': 'all', # Defines if the EFS should be cleaned up before. values: `'all'`,`'pip'`,`'file'` uploading
-  'aws_profile': 'efsync', # aws iam profile with required permission configured in .aws/credentials
+  'aws_profile': 'efsync2', # aws iam profile with required permission configured in .aws/credentials
   'aws_region': 'eu-central-1', # the aws region where the efs is running
   'efs_pip_dir': 'lib',  # pip directory on ec2
   'python_version': 3.8,  # python version used for installing pip dependencies -> should be used as lambda runtime afterwads
@@ -124,7 +130,7 @@ config = {
   's3_keyprefix': 'models/bert' # s3 keyprefix for the files
 }
 
-from efsync import efsync
+from efsync2 import efsync
 
 efsync(config)
 
@@ -139,10 +145,10 @@ efsync(config)
 #standard configuration
 efs_filesystem_id: fs-2adfas123 # aws efs filesystem id (moint point)
 subnet_Id: subnet-xxx # subnet of which the efs is running in
-ec2_key_name: efsync-asd913fjgq3 # required key name for starting the ec2 instance
+ec2_key_name: efsync2-asd913fjgq3 # required key name for starting the ec2 instance
 clean_efs: all # Defines if the EFS should be cleaned up before. values: `'all'`,`'pip'`,`'file'` uploading
 # aws profile configuration
-aws_profile: efsync # aws iam profile with required permission configured in .aws/credentials
+aws_profile: efsync2 # aws iam profile with required permission configured in .aws/credentials
 aws_region: eu-central-1 # the aws region where the efs is running
 
 # pip dependencies configurations
@@ -157,10 +163,10 @@ requirements: requirements.txt # path + file to requirements.txt which holds the
 #standard configuration
 efs_filesystem_id: fs-2226b27a # aws efs filesystem id (moint point)
 subnet_Id: subnet-17f97a7d # subnet of which the efs is running in
-ec2_key_name: efsync-asd913fjgq3 # required key name for starting the ec2 instance
+ec2_key_name: efsync2-asd913fjgq3 # required key name for starting the ec2 instance
 clean_efs: all # Defines if the EFS should be cleaned up before. values: `'all'`,`'pip'`,`'file'` uploading
 # aws profile configuration
-aws_profile: efsync # aws iam profile with required permission configured in .aws/credentials
+aws_profile: efsync2 # aws iam profile with required permission configured in .aws/credentials
 aws_region: eu-central-1 # the aws region where the efs is running
 
 # pip dependencies configurations
@@ -169,7 +175,7 @@ python_version: 3.8 # python version used for installing pip dependencies -> sho
 requirements: requirements.txt # path + file to requirements.txt which holds the installable pip dependencies
 
 # s3 config
-s3_bucket: efsync-test-bucket # s3 bucket name from files should be downloaded
+s3_bucket: efsync2-test-bucket # s3 bucket name from files should be downloaded
 s3_keyprefix: distilbert # s3 keyprefix for the files
 file_dir_on_ec2: ml # name of the directory where your file from <file_dir> will be uploaded, if you use scp it will it will be /file_dir
 ```
@@ -180,30 +186,32 @@ file_dir_on_ec2: ml # name of the directory where your file from <file_dir> will
 #standard configuration
 efs_filesystem_id: fs-2226b27a # aws efs filesystem id (moint point)
 subnet_Id: subnet-17f97a7d # subnet of which the efs is running in
-ec2_key_name: efsync-asd913fjgq3 # required key name for starting the ec2 instance
+ec2_key_name: efsync2-asd913fjgq3 # required key name for starting the ec2 instance
 clean_efs: all # Defines if the EFS should be cleaned up before. values: `'all'`,`'pip'`,`'file'` uploading
 # aws profile configuration
-aws_profile: efsync # aws iam profile with required permission configured in .aws/credentials
+aws_profile: efsync2 # aws iam profile with required permission configured in .aws/credentials
 aws_region: eu-central-1 # the aws region where the efs is running
 
 # s3 config
-s3_bucket: efsync-test-bucket # s3 bucket name from files should be downloaded
+s3_bucket: efsync2-test-bucket # s3 bucket name from files should be downloaded
 s3_keyprefix: distilbert # s3 keyprefix for the files
 file_dir_on_ec2: ml # name of the directory where your file from <file_dir> will be uploaded, if you use scp it will it will be /file_dir
 ```
 
 ### Installing Pip dependencies and uploading local files with scp to efs
 
-_Note: If you sync file with scp from local directory (e.g. model/bert) to efs (my_efs_model) efsync will sync the model to (my_efs_model/bert) that happens becaus wie `scp` recursivly_
+## Note: If you sync a file with scp from local directory (e.g. model/bert) to efs (my_efs_model) efsync2 will sync the model to (my_efs_model/bert). This is due to scp's recursive copy functionality. 
+### For example, if you set the destination path on your efs to be `foldername` and you are uploading `foldername`, the true path will be `your/efs/mount/foldername/foldername` when you wish to access your models.
+### If confused, I recommending double checking with `os.walk`. I am considering modifying this functionality in the future.
 
 ```yaml
 #standard configuration
 efs_filesystem_id: fs-2226b27a # aws efs filesystem id (moint point)
 subnet_Id: subnet-17f97a7d # subnet of which the efs is running in
-ec2_key_name: efsync-asd913fjgq3 # required key name for starting the ec2 instance
+ec2_key_name: efsync2-asd913fjgq3 # required key name for starting the ec2 instance
 clean_efs: all # Defines if the EFS should be cleaned up before. values: `'all'`,`'pip'`,`'file'` uploading
 # aws profile configuration
-aws_profile: efsync # aws iam profile with required permission configured in .aws/credentials
+aws_profile: efsync2 # aws iam profile with required permission configured in .aws/credentials
 aws_region: eu-central-1 # the aws region where the efs is running
 
 # upload files with scp to efs
@@ -213,16 +221,18 @@ file_dir_on_ec2: ml # name of the directory where your file from <file_dir> will
 
 ### Only uploading local files with scp to efs
 
-_Note: If you sync file with scp from local directory (e.g. model/bert) to efs (my_efs_model) efsync will sync the model to (my_efs_model/bert) that happens becaus wie `scp` recursivly_
+## Note: If you sync a file with scp from local directory (e.g. model/bert) to efs (my_efs_model) efsync2 will sync the model to (my_efs_model/bert). This is due to scp's recursive copy functionality. 
+### For example, if you set the destination path on your efs to be `foldername` and you are uploading `foldername`, the true path will be `your/efs/mount/foldername/foldername` when you wish to access your models.
+### If confused, I recommending double checking with `os.walk`. I am considering modifying this functionality in the future.
 
 ```yaml
 #standard configuration
 efs_filesystem_id: fs-2226b27a # aws efs filesystem id (moint point)
 subnet_Id: subnet-17f97a7d # subnet of which the efs is running in
-ec2_key_name: efsync-asd913fjgq3 # required key name for starting the ec2 instance
+ec2_key_name: efsync2-asd913fjgq3 # required key name for starting the ec2 instance
 clean_efs: all # Defines if the EFS should be cleaned up before. values: `'all'`,`'pip'`,`'file'` uploading
 # aws profile configuration
-aws_profile: efsync # aws iam profile with required permission configured in .aws/credentials
+aws_profile: efsync2 # aws iam profile with required permission configured in .aws/credentials
 aws_region: eu-central-1 # the aws region where the efs is running
 
 # pip dependencies configurations
@@ -237,7 +247,7 @@ file_dir_on_ec2: ml # name of the directory where your file from <file_dir> will
 
 # 🏗 <a name="examples"></a> Examples
 
-I provided several jupyter notebooks with examples. There are examples for installing pip dependencies only, installing pip dependencies and syncing files from s3 to efs, downloading only files from s3, installing pip dependencies and uploading files from local with scp and only uploading files with scp. All examples can be run in a Google Colab Notebook.
+There are several jupyter notebooks with examples, including installing pip dependencies only, installing pip dependencies and syncing files from s3 to efs, downloading only files from s3, and installing pip dependencies and uploading files from local with scp and only uploading files with scp. All examples can be run in a Google Colab Notebook.
 
 - [installing pip dependencies](./examples/efsync_pip_packages.ipynb)
 - [installing pip dependencies and syncing files from s3 to efs](./examples/efsync_pip_packages_and_s3_files.ipynb)
@@ -248,7 +258,7 @@ I provided several jupyter notebooks with examples. There are examples for insta
 **simplest usage:**
 
 ```python
-from efsync import efsync
+from efsync2 import efsync
 
 efsync('efsync.yaml')
 ```

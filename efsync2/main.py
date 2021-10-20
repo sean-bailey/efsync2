@@ -2,15 +2,15 @@ import os
 import boto3
 import sys
 import time
-from efsync.utils.ssh.ssh_key import create_ssh_key, delete_ssh_key
-from efsync.utils.security_group.ec2_security_group import create_secruity_group, delete_secruity_group, get_security_group_id
-from efsync.utils.ec2.ec2_main import create_ec2_instance, terminate_ec2_instance
-from efsync.utils.iam_profile.iam_profile import delete_iam_profile
-from efsync.utils.ssh.scp_to_ec2 import copy_files_to_ec2
+from efsync2.utils.ssh.ssh_key import create_ssh_key, delete_ssh_key
+from efsync2.utils.security_group.ec2_security_group import create_secruity_group, delete_secruity_group, get_security_group_id
+from efsync2.utils.ec2.ec2_main import create_ec2_instance, terminate_ec2_instance
+from efsync2.utils.iam_profile.iam_profile import delete_iam_profile
+from efsync2.utils.ssh.scp_to_ec2 import copy_files_to_ec2
 
-from efsync.utils.config.load_config import load_config
+from efsync2.utils.config.load_config import load_config
 
-from efsync.logger import get_logger
+from efsync2.logger import get_logger
 import argparse
 
 

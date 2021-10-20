@@ -2,26 +2,26 @@ import pytest
 from pytest import assume
 
 import boto3
-# from efsync.utils.dir import create_dir, delete_dir
-# from efsync.utils.pip_install_local import pip_install_requirements
-# from efsync.utils.ec2_install_pip import install_pip_on_ec2, read_requirements_from_file
-from efsync.utils.ssh.ssh_key import create_ssh_key, delete_ssh_key
-from efsync.utils.security_group.ec2_security_group import create_secruity_group, delete_secruity_group, get_security_group_id
-from efsync.utils.ec2.ec2_main import create_ec2_instance, terminate_ec2_instance
-from efsync.utils.iam_profile.iam_profile import create_iam_profile, delete_iam_profile
-from efsync.utils.efs.describe_efs import describe_file_systems
-# from efsync.utils.ec2_mount_efs import mount_efs
-from efsync.utils.ssh.scp_to_ec2 import copy_files_to_ec2
-from efsync.utils.config.get_boto3_client import get_boto3_client
-from efsync.utils.config.load_args_from_yaml import load_args_from_yaml
-from efsync.utils.config.load_config import load_config
-from efsync.utils.config.validate_config import validate_config
-from efsync.utils.config.read_requirements_from_file import read_requirements_from_file
-from efsync.utils.ec2.create_user_data import create_user_data
-from efsync.utils.ec2.custom_waiter import custom_waiter
+# from efsync2.utils.dir import create_dir, delete_dir
+# from efsync2.utils.pip_install_local import pip_install_requirements
+# from efsync2.utils.ec2_install_pip import install_pip_on_ec2, read_requirements_from_file
+from efsync2.utils.ssh.ssh_key import create_ssh_key, delete_ssh_key
+from efsync2.utils.security_group.ec2_security_group import create_secruity_group, delete_secruity_group, get_security_group_id
+from efsync2.utils.ec2.ec2_main import create_ec2_instance, terminate_ec2_instance
+from efsync2.utils.iam_profile.iam_profile import create_iam_profile, delete_iam_profile
+from efsync2.utils.efs.describe_efs import describe_file_systems
+# from efsync2.utils.ec2_mount_efs import mount_efs
+from efsync2.utils.ssh.scp_to_ec2 import copy_files_to_ec2
+from efsync2.utils.config.get_boto3_client import get_boto3_client
+from efsync2.utils.config.load_args_from_yaml import load_args_from_yaml
+from efsync2.utils.config.load_config import load_config
+from efsync2.utils.config.validate_config import validate_config
+from efsync2.utils.config.read_requirements_from_file import read_requirements_from_file
+from efsync2.utils.ec2.create_user_data import create_user_data
+from efsync2.utils.ec2.custom_waiter import custom_waiter
 
 
-from efsync.logger import get_logger
+from efsync2.logger import get_logger
 logger = get_logger()
 
 
@@ -30,7 +30,7 @@ region = 'eu-central-1'
 key_name = 'unit-tests-fgdfg'
 subnet_Id = 'subnet-17f97a7d'
 efs_filesystem_id = 'fs-2226b27a'
-test_file_dir = 'efsync/test/data'
+test_file_dir = 'efsync2/test/data'
 
 
 #! not used anymore
@@ -99,7 +99,7 @@ def test_get_default_security_group_id():
 
 
 def test_ec2_instance():
-    args = 'efsync/test/efsync.yaml'
+    args = 'efsync2/test/efsync2.yaml'
     config = load_config(args)
     security_id = create_secruity_group(config['bt3'])
     config['security_group'] = security_id
@@ -165,14 +165,14 @@ def test_scp_to_ec2_efs():
 
 
 def test_create_iam_profile():
-    args = 'efsync/test/efsync.yaml'
+    args = 'efsync2/test/efsync2.yaml'
     config = load_config(args)
     res = create_iam_profile(config)
     assert isinstance(res, dict)
 
 
 def test_delete_iam_profile():
-    args = 'efsync/test/efsync.yaml'
+    args = 'efsync2/test/efsync2.yaml'
     config = load_config(args)
 
     res = delete_iam_profile(config)
@@ -193,16 +193,16 @@ def test_get_boto3_client():
 
 
 def test_load_args_from_yaml():
-    res = load_args_from_yaml('efsync/test/efsync.yaml')
+    res = load_args_from_yaml('efsync2/test/efsync2.yaml')
     assert isinstance(res, dict)
 
 
 def test_load_config():
-    args = {'config_file': 'efsync/test/efsync.yaml'}
+    args = {'config_file': 'efsync2/test/efsync2.yaml'}
     res = load_config(args)
     assert isinstance(res, dict)
 
-    args = 'efsync/test/efsync.yaml'
+    args = 'efsync2/test/efsync2.yaml'
     res = load_config(args)
     assert isinstance(res, dict)
 
@@ -212,7 +212,7 @@ def test_load_config():
 
 
 def test_read_requirements_from_file():
-    res = read_requirements_from_file('efsync/test/requirements.txt')
+    res = read_requirements_from_file('efsync2/test/requirements.txt')
     assert isinstance(res, str)
 
 
@@ -225,7 +225,7 @@ def test_create_user_data():
     assert 'sudo rm -rf efs/*' in res
     # test pip install
     config = {'aws_profile': 'schueler-vz', 'aws_region': 'eu-central-1',  'efs_filesystem_id': efs_filesystem_id,
-              'efs_pip_dir': 'lib', 'python_version': 3.8, 'requirements': 'efsync/test/requirements.txt',
+              'efs_pip_dir': 'lib', 'python_version': 3.8, 'requirements': 'efsync2/test/requirements.txt',
               'clean_efs': 'pip',
               }
     res = create_user_data(config)
@@ -241,7 +241,7 @@ def test_create_user_data():
     assert f'sudo rm -rf efs/{config["file_dir_on_ec2"]}/*' in res
     # test all
     config = {'aws_profile': 'schueler-vz', 'aws_region': 'eu-central-1',  'efs_filesystem_id': efs_filesystem_id,
-              'efs_pip_dir': 'lib', 'python_version': 3.8, 'requirements': 'efsync/test/requirements.txt',
+              'efs_pip_dir': 'lib', 'python_version': 3.8, 'requirements': 'efsync2/test/requirements.txt',
               'file_dir_on_ec2': 'ml', 's3_keyprefix': 'model/bert', 's3_bucket': 'mybucket',
               'clean_efs': 'all',
               }
@@ -256,7 +256,7 @@ def test_create_user_data():
 
 
 def test_custom_waiter():
-    args = 'efsync/test/efsync.yaml'
+    args = 'efsync2/test/efsync2.yaml'
     config = load_config(args)
     res = custom_waiter(config, 'i-0924fcb5b23576a9f')
 
@@ -264,7 +264,7 @@ def test_custom_waiter():
 def test_validate_config():
     # test all
     config = {'aws_profile': 'schueler-vz', 'aws_region': 'eu-central-1',  'efs_filesystem_id': 'as','subnet_Id':'123',
-              'efs_pip_dir': 'lib', 'python_version': 3.8, 'requirements': 'efsync/test/requirements.txt',
+              'efs_pip_dir': 'lib', 'python_version': 3.8, 'requirements': 'efsync2/test/requirements.txt',
               'file_dir_on_ec2': 'ml', 's3_keyprefix': 'model/bert', 's3_bucket': 'mybucket',"ec2_key_name":'123',
               'clean_efs': 'all',
               }    
@@ -280,7 +280,7 @@ def test_validate_config():
 
     # test pip install
     config = {'aws_profile': 'schueler-vz', 'aws_region': 'eu-central-1',  'efs_filesystem_id': efs_filesystem_id,'subnet_Id':'123',
-              'efs_pip_dir': 'lib', 'python_version': 3.8, 'requirements': 'efsync/test/requirements.txt',"ec2_key_name":'123',
+              'efs_pip_dir': 'lib', 'python_version': 3.8, 'requirements': 'efsync2/test/requirements.txt',"ec2_key_name":'123',
               'clean_efs': 'pip',
               }
     res = validate_config(config)

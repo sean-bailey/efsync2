@@ -3,7 +3,7 @@ import shutil
 # define the name of the directory to be created
 
 
-def create_dir(path='.efsync'):
+def create_dir(path='.efsync2'):
     try:
         os.mkdir(path)
     except OSError:
@@ -14,7 +14,7 @@ def create_dir(path='.efsync'):
         return True
 
 
-def delete_dir(path='.efsync'):
+def delete_dir(path='.efsync2'):
     try:
         shutil.rmtree(path)
     except OSError:

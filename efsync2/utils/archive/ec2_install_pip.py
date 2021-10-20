@@ -1,4 +1,4 @@
-from efsync.utils.helper.createSSHClient import createSSHClient
+from efsync2.utils.helper.createSSHClient import createSSHClient
 import paramiko
 import boto3
 # https: // serverfault.com/questions/836198/how-to-install-docker-on-aws-ec2-instance-with-ami-ce-ee-update
