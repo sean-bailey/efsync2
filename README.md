@@ -1,6 +1,6 @@
 # 🚀 efsync2 - Open-Source MLOps tool for running serverless machine learning
 
-[![Downloads](https://pepy.tech/badge/efsync)](https://pepy.tech/project/efsync) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sean-bailey/efsync2/blob/main/examples/efsync_pip_packages_and_s3_files.ipynb) ![pypi package deployment](https://github.com/sean-bailey/efsync2/workflows/pypi%20package%20deployment/badge.svg) [![PyPI version](https://badge.fury.io/py/efsync.svg)](https://badge.fury.io/py/efsync)
+[![Downloads](https://pepy.tech/badge/efsync2)](https://pepy.tech/project/efsync2) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/sean-bailey/efsync2/blob/main/examples/efsync_pip_packages_and_s3_files.ipynb) ![pypi package deployment](https://github.com/sean-bailey/efsync2/workflows/pypi%20package%20deployment/badge.svg) [![PyPI version](https://badge.fury.io/py/efsync2.svg)](https://badge.fury.io/py/efsync2)
 
 efsync2 is an updated fork from [Philipp Schmid's](https://github.com/philschmid) efsync tool. I noticed that there were errors rendering the code non-functional for deployment, as specified in [This issue](https://github.com/philschmid/efsync/issues/15). Fortunately, [Chi W Pak](https://github.com/ChiWPak) generated a fix and a [Pull Request](https://github.com/philschmid/efsync/pull/18) which would fix it! Unfortunately, as of this writing, these issues and PR have been outstanding for over six months. I wanted to share deployable serverless machine learning inferences running purely on Lambda, and wanted to include functioning packages and code in the instructions. So, I implemented Chi's fix into a fork of Philipp's code, and am releasing it as its own package for future use -- efsync2!
 
@@ -294,10 +294,10 @@ efsync('efsync.yaml')
 
 # <a name="connect"></a> 🔗 Connect with me
 
-<a href="https://www.philschmid.de" target="_blank"><img alt="Personal Website" src="https://img.shields.io/badge/Personal%20Website-%2312100E.svg?&style=for-the-badge&logoColor=white" /></a>
-<a href="https://twitter.com/_philschmid" target="_blank"><img alt="Twitter" src="https://img.shields.io/badge/twitter-%231DA1F2.svg?&style=for-the-badge&logo=twitter&logoColor=white" /></a>
-<a href="https://medium.com/@schmidphilipp1995" target="_blank"><img alt="Medium" src="https://img.shields.io/badge/medium-%2312100E.svg?&style=for-the-badge&logo=medium&logoColor=white" /></a>
-<a href="https://www.linkedin.com/in/philipp-schmid-a6a2bb196" target="_blank"><img alt="LinkedIn" src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
+<a href="https://blog.baileytec.net" target="_blank"><img alt="Personal Website" src="https://img.shields.io/badge/Personal%20Website-%2312100E.svg?&style=for-the-badge&logoColor=white" /></a>
+<a href="https://twitter.com/seanbailey518" target="_blank"><img alt="Twitter" src="https://img.shields.io/badge/twitter-%231DA1F2.svg?&style=for-the-badge&logo=twitter&logoColor=white" /></a>
+<a href="https://medium.com/@seanbailey518" target="_blank"><img alt="Medium" src="https://img.shields.io/badge/medium-%2312100E.svg?&style=for-the-badge&logo=medium&logoColor=white" /></a>
+<a href="https://www.linkedin.com/in/baileytec/" target="_blank"><img alt="LinkedIn" src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
 
 # 🏥 Contributing
 
