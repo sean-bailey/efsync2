@@ -30,7 +30,7 @@ setup(
     description="A CLI/SDK which automatically uploads pip packages and directories to aws efs to be used in aws lambda",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/philschmid",
+    url="https://github.com/sean-bailey",
     python_requires=">=3.6",
     classifiers=[
         "Programming Language :: Python :: 3",
